@@ -1,0 +1,92 @@
+<!doctype html>
+<html
+	lang="en">
+	<!-- [Head] start -->
+
+	<head>
+		<title>
+			{% block title %}
+				LMS
+			{% endblock %}
+		</title>
+		<!-- [Meta] -->
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="description" content="Datta able is trending dashboard template made using Bootstrap 5 design framework. Datta able is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies."/>
+		<meta name="keywords" content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard"/>
+		<meta
+		name="author" content="Codedthemes"/>
+
+		{# --- Assets (favicon, fonts, css, icons) --- #}
+		<link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon"/>
+
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+		<link rel="stylesheet" href="{{ asset('assets/fonts/phosphor/regular/style.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('assets/fonts/tabler-icons.min.css') }}"/>
+
+		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link"/>
+		<link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}"/>
+        
+        {% block stylesheets %}{% endblock %}
+
+		</head>
+		<!-- [Head] end -->
+		<!-- [Body] Start -->
+
+		<body
+			data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
+
+			<!-- [ Pre-loader ] start -->
+			<div class="loader-bg">
+				<div class="loader-track">
+					<div class="loader-fill"></div>
+				</div>
+			</div>
+			<!-- [ Pre-loader ] End -->
+
+			{% include 'layouts/partials/_sidebar.html.twig' %}
+
+			{% include 'layouts/partials/_header.html.twig' %}
+
+			<!-- [ Main Content ] start -->
+			<div class="pc-container">
+				<div
+					class="pc-content">
+					<!-- [ Main Content ] end -->
+					{% block body %}{% endblock %}
+				</div>
+			</div>
+			<!-- [ Main Content ] end -->
+
+			{% include 'layouts/partials/_footer.html.twig' %}
+
+		    {# [Page Plugins] #}
+            <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
+            <script src="{{ asset('assets/js/plugins/jsvectormap.min.js') }}"></script>
+            <script src="{{ asset('assets/js/plugins/world.js') }}"></script>
+            <script src="{{ asset('assets/js/dashboard/dashboard-default.js') }}"></script>
+
+            {# [Required JS] #}
+            <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
+            <script src="{{ asset('assets/js/plugins/simplebar.min.js') }}"></script>
+            <script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('assets/js/script.js') }}"></script>
+            <script src="{{ asset('assets/js/theme.js') }}"></script>
+
+            {# External script stays as-is #}
+            <script defer src="https://fomo.codedthemes.com/pixel/yRevReYmxkh1j4z7Hc4tgbOKeXSu5Bm1"></script>
+
+            {# Inline JS (same as your snippet) #}
+            <script>
+                layout_change('light');
+                change_box_container('false');
+                layout_caption_change('true');
+                layout_rtl_change('false');
+                preset_change('preset-1');
+                layout_theme_sidebar_change('false');
+            </script>
+		</body>
+		<!-- [Body] end -->
+	</html>
