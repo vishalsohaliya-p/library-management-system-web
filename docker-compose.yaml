@@ -1,0 +1,20 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: library_management_system_web
+    networks:
+      - library_management_system_net
+    volumes:
+      - .:/var/www/library_management_system_web:delegated
+    ports:
+      - "8001:8001"   # host:container
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+    restart: unless-stopped
+
+networks:
+  library_management_system_net:
+    external: true
