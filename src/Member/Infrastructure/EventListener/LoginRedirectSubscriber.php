@@ -34,7 +34,7 @@ class LoginRedirectSubscriber implements EventSubscriberInterface
         }
 
         // If no token, redirect to login
-        if (!$this->jwtStorage->getToken()) {
+        if ($this->jwtStorage->isTokenExpired()) {
             $loginUrl = $this->router->generate('app_login');
             $event->setResponse(new RedirectResponse($loginUrl));
         }

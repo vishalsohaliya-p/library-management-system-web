@@ -8,3 +8,5 @@ composer require symfony/twig-bundle
 composer require symfony/asset
 
 composer require symfony/security-bundle
+
+composer require symfony/form

@@ -24,6 +24,24 @@ class ApiClient
 
         $response = $this->httpClient->request($method, $_ENV['API_BASE_URL'] . $uri, $options);
 
-        return $response->toArray(false); // return array, don’t throw on 4xx/5xx
+        // Get HTTP status code
+        $statusCode = $response->getStatusCode();
+
+        // Get raw content without throwing on 4xx/5xx
+        $content = $response->getContent(false);
+
+        if (!empty($content)) {
+            // Decode JSON body if exists
+            return $response->toArray(false);
+        }
+
+        // No content returned (204, DELETE, PUT without body)
+        // Consider 2xx status as success
+        if ($statusCode >= 200 && $statusCode < 300) {
+            return ['success' => true];
+        }
+
+        // If 4xx/5xx and no content, return false
+        return ['success' => false];
     }
 }

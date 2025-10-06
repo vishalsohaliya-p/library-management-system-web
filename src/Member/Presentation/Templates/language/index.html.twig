@@ -1,0 +1,78 @@
+{% extends 'layouts/main.html.twig' %}
+
+{% block title %}Language
+{% endblock %}
+
+{% block body %}
+	<!-- [ breadcrumb ] start -->
+	<div class="page-header">
+		<div class="page-block">
+			<div class="row align-items-center">
+				<div class="col-md-12">
+					<div class="page-header-title">
+						<h5 class="mb-0">Languages</h5>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<ul class="breadcrumb mb-0">
+						<li class="breadcrumb-item">
+							<a href="../dashboard/index.html">Home</a>
+						</li>
+						<li class="breadcrumb-item">
+							<a href="javascript: void(0)">Catalog</a>
+						</li>
+						<li class="breadcrumb-item" aria-current="page">Languages</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- [ breadcrumb ] end -->
+
+	<!-- [ Main Content ] start -->
+	<div
+		class="row">
+
+		<!-- [ Recent Users ] start -->
+		<div class="col-xl-8 col-md-6">
+			<div class="card Recent-Users table-card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h5>Languages</h5>
+                    <a href="../language/add" class="btn btn-primary shadow px-sm-4 text-white align-right">Add</a>
+				</div>
+				<div class="card-body px-0 py-3">
+					<div class="table-responsive">
+						<table class="table table-hover mb-0">
+							<thead>
+                            <th>Name</th>
+                            <th>Is Active?</th>
+                            <th>Action</th>
+                            </thead>
+							<tbody>
+								{% for language in languages %}
+									<tr class="unread">
+										<td>
+											{{ language.languageName }}
+										</td>
+										<td>
+											{% if language.isActive %}
+												<a class="badge me-2 bg-brand-color-1 text-white f-12">Active</a>
+											{% else %}
+												<a class="badge me-2 bg-brand-color-2 text-white f-12">Not Active</a>
+											{% endif %}
+										</td>
+                                        <td>
+                                            <a href="../language/{{language.languageId}}/edit" class="badge me-2 bg-primary text-white f-12"><i class="ti ti-edit-circle"></i></a>
+                                            <a href="../language/{{language.languageId}}/delete" class="badge me-2 bg-danger text-white f-12"><i class="ti ti-archive-filled"></i></a>
+                                        </td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- [ Recent Users ] end -->
+	</div>
+{% endblock %}
