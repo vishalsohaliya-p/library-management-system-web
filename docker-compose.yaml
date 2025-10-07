@@ -10,6 +10,8 @@ services:
       - .:/var/www/library_management_system_web:delegated
     ports:
       - "8001:8001"   # host:container
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       APP_ENV: dev
       APP_DEBUG: 1

@@ -38,19 +38,19 @@
 			<div class="card Recent-Users table-card">
 				<div class="card-header d-flex justify-content-between align-items-center">
 					<h5>Languages</h5>
-                    <a href="../language/add" class="btn btn-primary shadow px-sm-4 text-white align-right">Add</a>
+					<a href="../language/add" class="btn btn-primary shadow px-sm-4 text-white align-right">Add</a>
 				</div>
 				<div class="card-body px-0 py-3">
 					<div class="table-responsive">
 						<table class="table table-hover mb-0">
 							<thead>
-                            <th>Name</th>
-                            <th>Is Active?</th>
-                            <th>Action</th>
-                            </thead>
+								<th>Name</th>
+								<th>Is Active?</th>
+								<th>Action</th>
+							</thead>
 							<tbody>
 								{% for language in languages %}
-									<tr class="unread">
+									<tr class="unread" id="language-{{ language.languageId }}">
 										<td>
 											{{ language.languageName }}
 										</td>
@@ -61,10 +61,14 @@
 												<a class="badge me-2 bg-brand-color-2 text-white f-12">Not Active</a>
 											{% endif %}
 										</td>
-                                        <td>
-                                            <a href="../language/{{language.languageId}}/edit" class="badge me-2 bg-primary text-white f-12"><i class="ti ti-edit-circle"></i></a>
-                                            <a href="../language/{{language.languageId}}/delete" class="badge me-2 bg-danger text-white f-12"><i class="ti ti-archive-filled"></i></a>
-                                        </td>
+										<td>
+											<a href="../language/{{language.languageId}}/edit" class="badge me-2 bg-primary text-white f-12">
+												<i class="ti ti-edit-circle"></i>
+											</a>
+											<a href="" data-bs-toggle="modal" onClick="onDelete('{{language.languageName}}', '{{language.languageId}}');" data-bs-target="#exampleModalLive" class="badge me-2 bg-danger text-white f-12">
+												<i class="ti ti-archive-filled"></i>
+											</a>
+										</td>
 									</tr>
 								{% endfor %}
 							</tbody>
@@ -75,4 +79,24 @@
 		</div>
 		<!-- [ Recent Users ] end -->
 	</div>
+
+	<div id="exampleModalLive" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLiveLabel" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLiveLabel">Are You Sure?</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p id="text-question">You want to delete</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="modal-delete-no" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+					<button type="button" id="modal-delete-yes" onClick="onDeleteYes()" class="btn btn-primary">Yes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{{ asset('assets/js/language/language-default.js') }}"></script>
 {% endblock %}

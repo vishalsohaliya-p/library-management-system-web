@@ -6,6 +6,7 @@ use App\Member\Application\Language\Form\LanguageFormType;
 use App\Member\Application\Language\Model\LanguageFormModel;
 use App\Member\Application\Language\Model\LanguageListModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -77,11 +78,24 @@ class LanguageController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
     public function delete(int $id): Response
     {
-        $this->languageService->delete($id);
-        $this->addFlash('success', 'Language deleted.');
-        return $this->redirectToRoute('language_list');
+        try {
+            $this->languageService->delete($id);
+            
+            // Return JSON success response
+            return new JsonResponse([
+                'success' => true,
+                'message' => 'Language deleted successfully.',
+                'id' => $id
+            ], 200);
+            
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => 'Failed to delete language: ' . $e->getMessage()
+            ], 400);
+        }
     }
 }
